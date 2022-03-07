@@ -1,6 +1,7 @@
 use yew::prelude::*;
 use components::header::Header;
 use components::list::List;
+use components::form::Form;
 
 mod components;
 
@@ -10,6 +11,7 @@ fn app() -> Html {
         <>
             <Header />
             <main class="container-fluid">
+                <Form />
                 <List />
             </main>
         </>
