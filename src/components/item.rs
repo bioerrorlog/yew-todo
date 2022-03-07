@@ -10,8 +10,8 @@ pub struct ItemProps {
 pub fn item(props: &ItemProps) -> Html {
     html! {
         <li class="list-group-item">
-        <input class="form-check-input" type="checkbox" checked={props.completed} />
-          {&props.title}
+            <input class="form-check-input" type="checkbox" checked={props.completed} />
+            {&props.title}
         </li>
     }
 }
