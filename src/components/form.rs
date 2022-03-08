@@ -1,7 +1,13 @@
-use yew::{function_component, html, Html, use_state, Callback, InputEvent};
+use yew::{function_component, html, Html, use_state, Callback, InputEvent, MouseEvent, Properties};
+
+
+#[derive(Properties, PartialEq)]
+pub struct FormProps {
+    pub on_add: Callback<String>,
+}
 
 #[function_component(Form)]
-pub fn form() -> Html {
+pub fn form(props: &FormProps) -> Html {
     let title = use_state(|| "".to_string());
 
     let oninput = {
@@ -20,6 +26,15 @@ pub fn form() -> Html {
         })
     };
 
+    let onclick = {
+        let on_add = props.on_add.clone();
+        let title = title.clone();
+        Callback::from(move |e:MouseEvent| {
+            e.prevent_default();
+            on_add.emit((*title).clone());
+        })
+    };
+
     html! {
         <form class="mb-5">
             <div class="mb-3">
@@ -29,7 +44,7 @@ pub fn form() -> Html {
             <div class="mb-3">
                 {&*title}
             </div>
-            <button type="submit" class="btn btn-primary">{"Add"}</button>
+            <button type="submit" class="btn btn-primary" {onclick}>{"Add"}</button>
         </form>
     }
 }
